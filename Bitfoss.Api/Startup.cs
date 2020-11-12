@@ -12,9 +12,12 @@ namespace Bitfoss.Api
     {
         private readonly IConfiguration _configuration;
 
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _environment;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
+            _environment = env;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -25,9 +28,18 @@ namespace Bitfoss.Api
             services.Configure<ApiClientsOptions>(_configuration);
             services.Configure<SmtpServiceOptions>(_configuration.GetSection(nameof(SmtpServiceOptions)));
 
-            // Transient services
+            // Add services
             services.AddTransient<IApiClientService, ApiClientService>();
-            services.AddTransient<ISmtpService, SmtpService>();
+
+            // Add environment-specific services
+            if (_environment.IsDevelopment())
+            {
+                services.AddTransient<ISmtpService, DummySmtpService>();
+            }
+            else
+            {
+                services.AddTransient<ISmtpService, SmtpService>();
+            }
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
