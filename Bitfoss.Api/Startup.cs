@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Bitfoss.Api.Services;
+using Bitfoss.Api.Services.Dummy;
 using Bitfoss.Api.Models.Options;
 
 namespace Bitfoss.Api

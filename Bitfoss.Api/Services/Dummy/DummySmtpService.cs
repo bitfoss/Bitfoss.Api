@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Bitfoss.Api.Models;
 
-namespace Bitfoss.Api.Services
+namespace Bitfoss.Api.Services.Dummy
 {
     public class DummySmtpService : ISmtpService
     {
