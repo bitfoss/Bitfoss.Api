@@ -10,8 +10,6 @@ namespace Bitfoss.Api.Models.Options
 
         public string SenderEmailAddress { get; set; }
 
-        public string SenderName { get; set; }
-
         public string Password { get; set; }
     }
 }
