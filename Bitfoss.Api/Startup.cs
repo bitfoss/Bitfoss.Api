@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Bitfoss.Api.Services;
 using Bitfoss.Api.Services.Dummy;
 using Bitfoss.Api.Models.Options;
+using Bitfoss.Api.Data.Repository;
+using Bitfoss.Api.Data.Repository.MySql;
 
 namespace Bitfoss.Api
 {
@@ -28,9 +30,11 @@ namespace Bitfoss.Api
             // Options
             services.Configure<ApiClientsOptions>(_configuration);
             services.Configure<SmtpServiceOptions>(_configuration.GetSection(nameof(SmtpServiceOptions)));
+            services.Configure<MySqlRepositoryOptions>(_configuration.GetSection(nameof(MySqlRepositoryOptions)));
 
             // Add services
             services.AddTransient<IApiClientService, ApiClientService>();
+            services.AddMySqlRepository();
 
             // Add environment-specific services
             if (_environment.IsDevelopment())
